@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  jobs-app-db:
+    image: postgres:13.2-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: jobs-app
+      POSTGRES_DB: jobs-app
+      POSTGRES_PASSWORD: jobs-app
+    volumes:
+      - jobs-app-db-vol:/var/lib/postgresql/data
+
+volumes:
+  jobs-app-db-vol:
