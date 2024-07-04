@@ -17,6 +17,7 @@ public sealed class SolicitantiProjectionSpec : BaseSpec<SolicitantiProjectionSp
     /// </summary>
     protected override Expression<Func<Solicitanti, SolicitantiDTO>> Spec => e => new()
     {
+        Id = e.Id,
         DataInregistare = e.DataInregistare,
         CnpSolicitant = e.CnpSolicitant,
         Nume = e.Nume,

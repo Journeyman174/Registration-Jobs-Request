@@ -45,9 +45,9 @@ public class SolicitantService : ISolicitantService
     public async Task<ServiceResponse> AddSolicitant(SolicitantiAddDTO solicitant, UserDTO requestingUser, CancellationToken cancellationToken = default)
     {
         
-        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Admin) // Verify who can add the user, you can change this however you se fit.
+        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Solicitant) // Verify who can add the user, you can change this however you se fit.
         {
-            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the Admin can add in Solicitanti!", ErrorCodes.CannotAdd));
+            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the Solocitant can add in Solicitanti!", ErrorCodes.CannotAdd));
         }
         if (requestingUser == null)
         {
@@ -80,7 +80,7 @@ public class SolicitantService : ISolicitantService
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the solicitant can add in Solicitanti!", ErrorCodes.CannotAdd));
         }
-        if (requestingUser.Role != UserRoleEnum.Admin && requestingUser.Role != UserRoleEnum.Client) // Verify who can add the user, you can change this however you se fit.
+        if (requestingUser.Role != UserRoleEnum.Admin && requestingUser.Role != UserRoleEnum.Solicitant) // Verify who can add the user, you can change this however you se fit.
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the solicitant and admin update the Solicitanti!", ErrorCodes.CannotUpdate));
         }
@@ -89,7 +89,6 @@ public class SolicitantService : ISolicitantService
 
         if (entity != null) // Verify if the user is not found, you cannot update an non-existing entity.
         {
-            entity.CnpSolicitant = solicitant.CnpSolicitant ?? entity.CnpSolicitant;
             entity.Nume = solicitant.Nume ?? entity.Nume;
             entity.Prenume = solicitant.Prenume ?? entity.Prenume;
             entity.Adresa = solicitant.Adresa ?? entity.Adresa;
@@ -111,7 +110,7 @@ public class SolicitantService : ISolicitantService
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the solicitant can delete the item!", ErrorCodes.CannotDelete));
         }
-        if (requestingUser.Role == UserRoleEnum.Client || requestingUser.Role == UserRoleEnum.Admin)
+        if (requestingUser.Role == UserRoleEnum.Solicitant || requestingUser.Role == UserRoleEnum.Admin)
         {
             var entity = await _repository.GetAsync(new SolicitantiSpec(id), cancellationToken);
             if (entity != null && entity.UserId != requestingUser.Id)

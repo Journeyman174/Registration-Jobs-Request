@@ -7,7 +7,6 @@ public record SolicitantiUpdateDTO
 (
     Guid Id,
     DateTime DataInregistare,
-    string CnpSolicitant,
     string Nume,
     string Prenume,
     string? Adresa
