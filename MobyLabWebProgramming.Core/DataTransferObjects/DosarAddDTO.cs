@@ -7,6 +7,8 @@ namespace MobyLabWebProgramming.Core.DataTransferObjects;
 /// </summary>
 public class DosarAddDTO
 {
+    public string NrDosar { get; set; } = default!;
+    public Guid IdSolicitant { get; set; } = default!;
     public DateTime DataDosar { get; set; }
     public string? CnpSolicitant { get; set; }
     public DateTime DeLa { get; set; }

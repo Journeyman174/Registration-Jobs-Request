@@ -9,6 +9,7 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
         {
             builder.HasKey(s => s.Id);
 
+            builder.HasAlternateKey(m => m.NrDosar);
             builder.Property(s => s.CnpSolicitant).IsRequired();
             builder.Property(s => s.DataDosar).IsRequired();
             builder.Property(s => s.DeLa).IsRequired();
@@ -17,6 +18,14 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
                 .WithOne(e => e.Dosar)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(e => e.User)
+                .WithMany(e => e.Dosare)
+                .HasForeignKey(e => e.UserId)
+                .HasPrincipalKey(e => e.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }
