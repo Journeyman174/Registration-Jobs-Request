@@ -12,4 +12,7 @@ public static class CommonErrors
     public static ErrorMessage TechnicalSupport => new(HttpStatusCode.InternalServerError, "An unknown error occurred, contact the technical support!", ErrorCodes.TechnicalError);
     public static ErrorMessage SolicitantNotFound => new(HttpStatusCode.NotFound, "Solicitant doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage DosarNotFound => new(HttpStatusCode.NotFound, "Dosar doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage StudiiNotFound => new(HttpStatusCode.NotFound, "Cod Studii doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage CorNotFound => new(HttpStatusCode.NotFound, " Cor doesn't exist!", ErrorCodes.EntityNotFound);
+
 }

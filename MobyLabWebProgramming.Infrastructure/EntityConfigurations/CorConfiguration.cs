@@ -10,7 +10,10 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
         public void Configure(EntityTypeBuilder<Cor> builder)
         {
             builder.HasKey(s => s.Id);
-            builder.HasOne(s =>s.CnpCalificari);
+            builder.HasMany(m => m.Lucratori)
+               .WithOne(e => e.Cor)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(e => e.CodCor)
                  .IsRequired();

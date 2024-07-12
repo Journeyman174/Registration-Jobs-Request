@@ -1,0 +1,2 @@
+test@my.app/admin
+test2@my.app/sol2 -solicitant

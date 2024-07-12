@@ -10,9 +10,18 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
             builder.HasKey(e => e.Id);
 
             builder.HasOne(e => e.Cor)
-                .WithOne(e => e.CnpCalificari)
-                .HasForeignKey<Cor>(e => e.Id)
-                .IsRequired();
+                .WithMany(e => e.Lucratori)
+                .HasPrincipalKey(s => s.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(e => e.Solicitanti)
+                .WithMany(e => e.Calificari)
+                .HasForeignKey(e => e.Id)
+                .HasPrincipalKey(e => e.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Property(e => e.IdCor)
                  .IsRequired();
         }

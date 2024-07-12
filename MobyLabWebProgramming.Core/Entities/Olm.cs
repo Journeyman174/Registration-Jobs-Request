@@ -16,7 +16,9 @@ namespace MobyLabWebProgramming.Core.Entities
         public int NrLocMunca { get; set; } = 0;
         public OlmStareEnum Stare { get; set; } =default!;
         // proprietati de navigare
-        public Cor Cor {  get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; } = default!;
+        public Cor Cor { get; set; } = default!;
         public ICollection<Repartitie> Repartitii { get; set; }= default!;
     }
 }

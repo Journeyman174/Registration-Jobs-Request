@@ -6,7 +6,7 @@
 /// </summary>
 public class CorDTO
 {
-    public Guid IdCor { get; set; }
+    public Guid Id { get; set; }
     public string CodCor { get; set; } = default!;
     public string Meserie { get; set; } = default!;
 }

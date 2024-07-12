@@ -8,6 +8,8 @@ namespace MobyLabWebProgramming.Core.Entities
         public string CodCor { get; set; } = default!; 
         public string Meserie { get; set; } = default!;
         // proprietati de navigare
-        public CnpCalificari CnpCalificari { get; set; } = default!;
+        public Guid UserId { get; set; }
+        public User User { get; set; } = default!;
+        public ICollection<CnpCalificari> Lucratori { get; set; } = default!;
     }
 }

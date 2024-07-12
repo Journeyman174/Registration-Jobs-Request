@@ -84,7 +84,7 @@ public class DosarService : IDosarService
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the Solicitant can delete dosar!", ErrorCodes.CannotDelete));
         }
-
+        await _repository.DeleteAsync<Dosar>(id, cancellationToken); // Delete the entity.
         return ServiceResponse.ForSuccess();
     }
 

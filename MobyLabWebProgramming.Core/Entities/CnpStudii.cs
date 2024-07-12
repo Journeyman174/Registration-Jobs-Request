@@ -4,7 +4,7 @@ namespace MobyLabWebProgramming.Core.Entities
 {
     public class CnpStudii : BaseEntity
     {
-        public Guid IdSolicitant { get; set; }
+        public Guid IdSolicitant { get; set; } 
         public string CnpSolicitant { get; set; } = default!;
         public Guid IdStudii { get; set; }
         // proprietati de navigare

@@ -10,8 +10,10 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
         public void Configure(EntityTypeBuilder<Studii> builder)
         {
             builder.HasKey(s => s.Id);
-            builder.HasOne(e => e.CnpStudii);
-
+            builder.HasMany(m => m.Persoane)
+               .WithOne(e => e.Studii)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
             builder.Property(e => e.DenStudii)
                  .IsRequired();
         }

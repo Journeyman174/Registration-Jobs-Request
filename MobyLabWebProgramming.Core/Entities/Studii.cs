@@ -6,6 +6,8 @@ namespace MobyLabWebProgramming.Core.Entities
     {
         public string DenStudii { get; set; } = default!;
         // proprietati de navigare
-        public CnpStudii CnpStudii { get; set; }= default!;
+        public Guid UserId { get; set; }
+        public User User { get; set; } = default!;
+        public ICollection<CnpStudii> Persoane { get; set; }= default!;
     }
 }

@@ -6,6 +6,7 @@
 /// </summary>
 public record CorUpdateDTO
 (
+    Guid Id,
     string CodCor,
     string Meserie
 );
