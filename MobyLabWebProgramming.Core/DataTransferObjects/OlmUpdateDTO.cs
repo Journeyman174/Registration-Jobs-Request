@@ -8,6 +8,7 @@ namespace MobyLabWebProgramming.Core.DataTransferObjects;
 /// </summary>
 public record OlmUpdateDTO
 (
+    Guid Id,
     DateTime DataOlm,
     DateTime DataOlmStart,
     DateTime DataOlmSfarsit,

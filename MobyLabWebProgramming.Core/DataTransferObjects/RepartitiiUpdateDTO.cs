@@ -9,6 +9,7 @@ namespace MobyLabWebProgramming.Core.DataTransferObjects;
 /// </summary>
 public record RepartitiiUpdateDTO
 (
+    Guid Id,
     string? CNP,
     DateTime DataRepartitie,
     Guid IdOlm,

@@ -6,7 +6,7 @@ namespace MobyLabWebProgramming.Core.Entities
 {
     public class Dosar : BaseEntity
     {
-        public string NrDosar { get; set; } = default!;
+
         public Guid IdSolicitant { get; set; } = default!;
         public DateTime DataDosar { get; set; }
         public string? CnpSolicitant { get; set; }

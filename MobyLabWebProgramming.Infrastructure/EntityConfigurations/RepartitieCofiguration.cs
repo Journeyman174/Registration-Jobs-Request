@@ -10,6 +10,16 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
             builder.Property(x => x.Id)
                 .IsRequired();
             builder.HasKey(m => m.Id);
+
+            builder.HasMany(m => m.DosareR)
+               .WithOne(e => e.Repartitie)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(m => m.RepartitiiOlm)
+               .WithMany(e => e.Repartitii)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

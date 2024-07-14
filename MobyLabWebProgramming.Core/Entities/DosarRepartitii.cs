@@ -7,7 +7,7 @@
         public Guid IdRepartitie { get; set; } = default!;
         // proprietati de navigare
         public Dosar Dosar { get; set; } = default!;
-        public ICollection<Repartitie> Repartitii { get; set; } = default!;
+        public Repartitie Repartitie { get; set; } = default!;
     }
 }
 

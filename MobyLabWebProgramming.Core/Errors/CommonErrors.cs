@@ -14,5 +14,7 @@ public static class CommonErrors
     public static ErrorMessage DosarNotFound => new(HttpStatusCode.NotFound, "Dosar doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage StudiiNotFound => new(HttpStatusCode.NotFound, "Cod Studii doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage CorNotFound => new(HttpStatusCode.NotFound, " Cor doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage OlmNotFound => new(HttpStatusCode.NotFound, " Oferta Loc Munca  doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage RepartitieNotFound => new(HttpStatusCode.NotFound, " Repartitie  doesn't exist!", ErrorCodes.EntityNotFound);
 
 }

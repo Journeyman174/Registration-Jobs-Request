@@ -14,4 +14,5 @@ public class RepartitiiDTO
     public DateTime DataRepartitie { get; set; }
     public Guid IdOlm { get; set; }
     public RezultatRepartitieEnum Rezultat { get; set; } = default!;
+    public Guid UserId { get; set; }
 }

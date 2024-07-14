@@ -1,2 +1,7 @@
 test@my.app/admin
+
+
+
+test1@my.app/sol1 -solicitant
 test2@my.app/sol2 -solicitant
+test3@my.app/sol3 - solicitant

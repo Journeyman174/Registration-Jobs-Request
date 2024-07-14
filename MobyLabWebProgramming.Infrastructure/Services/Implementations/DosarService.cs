@@ -103,7 +103,7 @@ public class DosarService : IDosarService
 
         if (entity != null) // Verify if the user is not found, you cannot update an non-existing entity.
         {
-            entity.NrDosar = dosar.NrDosar ?? entity.NrDosar;
+
             entity.DataDosar = dosar.DataDosar;
             entity.DeLa = dosar.DeLa;
             entity.PanaLa = dosar.PanaLa;

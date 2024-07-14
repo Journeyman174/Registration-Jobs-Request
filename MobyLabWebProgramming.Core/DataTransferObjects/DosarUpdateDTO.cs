@@ -6,7 +6,7 @@
 public record DosarUpdateDTO
 (
     Guid Id,
-    string NrDosar,
+
     DateTime DataDosar,
     string? CnpSolicitant,
     DateTime DeLa,

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MobyLabWebProgramming.Infrastructure.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MobyLabWebProgramming.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDatabaseContext))]
-    partial class WebAppDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240714133333_RepartitieMigration")]
+    partial class RepartitieMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,7 +127,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Dosar", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CnpSolicitant")
@@ -162,7 +164,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdSolicitant");
+                    b.HasAlternateKey("NrDosar");
 
                     b.HasIndex("UserId");
 
@@ -274,6 +276,9 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
                     b.Property<DateTime>("DataRepartitie")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("IdDosar")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdOlm")
                         .HasColumnType("uuid");
@@ -497,7 +502,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                 {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.Solicitanti", "Solicitanti")
                         .WithMany("Dosare")
-                        .HasForeignKey("IdSolicitant")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

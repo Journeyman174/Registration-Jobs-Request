@@ -190,6 +190,8 @@ public static class WebApplicationBuilderExtensions
             .AddTransient<ISolicitantService, SolicitantService>()
             .AddTransient<IStudiiService, StudiiService>()
             .AddTransient<ICorService, CorService>()
+            .AddTransient<IOlmService, OlmService>()
+            .AddTransient<IRepartitieService, RepartitieService>()
             .AddTransient<IDosarService, DosarService>();
 
         return builder;
