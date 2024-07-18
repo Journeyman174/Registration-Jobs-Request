@@ -11,5 +11,7 @@ namespace MobyLabWebProgramming.Core.Entities
         public Guid UserId { get; set; }
         public User User { get; set; } = default!;
         public ICollection<CnpCalificari> Lucratori { get; set; } = default!;
+        public ICollection<Olm> Oferte { get; set; } = default!;   
+
     }
 }

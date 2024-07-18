@@ -10,6 +10,16 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
         public void Configure(EntityTypeBuilder<Olm> builder)
         {
             builder.HasKey(s => s.Id);
+
+            builder.HasOne(e => e.Cor)
+                .WithMany(e => e.Oferte)
+                .HasForeignKey(e =>e.IdCor)
+                .HasPrincipalKey(s => s.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
             builder.Property(e => e.DataOlmStart)
                  .IsRequired();
             builder.Property(e => e.DataOlmSfarsit)

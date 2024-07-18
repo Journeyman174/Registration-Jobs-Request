@@ -14,6 +14,21 @@ IEntityTypeConfiguration<DosarRepartitii>
                  .IsRequired();
             builder.Property(e => e.IdRepartitie)
                  .IsRequired();
+
+            builder.HasOne(e => e.Repartitie)
+                .WithMany(e => e.DosareDr)
+                .HasForeignKey(e => e.IdRepartitie)
+                 .HasPrincipalKey(s => s.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(e => e.Dosar)
+                .WithMany(e => e.RepartitiiDr)
+                .HasForeignKey(e => e.IdDosar)
+                .HasPrincipalKey(e => e.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }

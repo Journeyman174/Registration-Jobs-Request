@@ -15,8 +15,9 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
             builder.Property(s => s.DeLa).IsRequired();
             builder.Property(s => s.PanaLa).IsRequired();
 
-            builder.HasMany(e => e.Repartitii)
+            builder.HasMany(e => e.RepartitiiDr)
                 .WithOne(e => e.Dosar)
+                .HasForeignKey(e => e.IdDosar)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 

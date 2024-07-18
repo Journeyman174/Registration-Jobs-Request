@@ -18,13 +18,13 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
 
             builder.HasMany(m => m.Pregatire)
                 .WithOne(e => e.Solicitanti)
-                .HasForeignKey(e => e.IdStudii)
+                .HasForeignKey(e => e.IdSolicitant)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(m => m.Calificari)
                 .WithOne(e => e.Solicitanti)
-                .HasForeignKey(e => e.IdCor)
+                .HasForeignKey(e => e.IdSolicitant)
 
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

@@ -13,10 +13,12 @@ namespace MobyLabWebProgramming.Core.Entities
         public DateTime DeLa { get; set; }
         public DateTime PanaLa { get; set; }
         public DosarStareEnum Stare { get; set; } = default!;
+ 
         // proprietati de navigare
         public Guid UserId { get; set; }
         public User User { get; set; } = default!;
-        public ICollection<DosarRepartitii> Repartitii { get; set; } = default!;
+
+        public ICollection<DosarRepartitii> RepartitiiDr { get; set; } = default!;
         public Solicitanti Solicitanti { get; set; } = default!;
 
     }

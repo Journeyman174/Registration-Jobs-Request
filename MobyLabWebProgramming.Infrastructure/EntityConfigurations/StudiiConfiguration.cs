@@ -12,6 +12,7 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
             builder.HasKey(s => s.Id);
             builder.HasMany(m => m.Persoane)
                .WithOne(e => e.Studii)
+               .HasForeignKey(e => e.IdStudii)
                .IsRequired()
                .OnDelete(DeleteBehavior.Cascade);
             builder.Property(e => e.DenStudii)

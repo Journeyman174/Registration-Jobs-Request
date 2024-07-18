@@ -10,8 +10,16 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
         public void Configure(EntityTypeBuilder<Cor> builder)
         {
             builder.HasKey(s => s.Id);
+
             builder.HasMany(m => m.Lucratori)
                .WithOne(e => e.Cor)
+               .HasForeignKey(e => e.IdCor)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(m => m.Oferte)
+               .WithOne(e => e.Cor)
+               .HasForeignKey(e => e.IdCor)
                .IsRequired()
                .OnDelete(DeleteBehavior.Cascade);
 

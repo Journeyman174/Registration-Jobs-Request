@@ -11,13 +11,15 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
                 .IsRequired();
             builder.HasKey(m => m.Id);
 
-            builder.HasMany(m => m.DosareR)
+            builder.HasMany(m => m.DosareDr)
                .WithOne(e => e.Repartitie)
+               .HasForeignKey(e => e.IdRepartitie)
                .IsRequired()
                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(m => m.RepartitiiOlm)
-               .WithMany(e => e.Repartitii)
+            builder.HasOne(m => m.Olm)
+               .WithMany(e => e.RepartitiiO)
+               .HasForeignKey(e => e.IdOlm)
                .IsRequired()
                .OnDelete(DeleteBehavior.Cascade);
         }

@@ -2,7 +2,7 @@
 
 namespace MobyLabWebProgramming.Core.Entities
 {
-    public class CnpCalificari :BaseEntity
+    public class CnpCalificari : BaseEntity
     {
         public Guid IdSolicitant { get; set; }
         public string CnpSolicitant { get; set; } = default!;
@@ -10,5 +10,8 @@ namespace MobyLabWebProgramming.Core.Entities
         // proprietati de navigare
         public Solicitanti Solicitanti { get; set; } = default!;
         public Cor Cor { get; set; } = default!;
+        public Guid UserId { get; set; }
+        public User User { get; set; } = default!;
+
     }
 }

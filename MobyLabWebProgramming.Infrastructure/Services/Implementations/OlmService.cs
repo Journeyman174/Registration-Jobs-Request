@@ -63,6 +63,7 @@ public class OlmService : IOlmService
             IdCor = olm.IdCor,
             AdresaLocMunca = olm.AdresaLocMunca,
             NrLocMunca= olm.NrLocMunca,
+            Stare=olm.Stare,
 
             UserId = requestingUser.Id
         }, cancellationToken); // A new entity is created and persisted in the database.

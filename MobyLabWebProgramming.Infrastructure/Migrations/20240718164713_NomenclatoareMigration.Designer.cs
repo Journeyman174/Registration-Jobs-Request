@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MobyLabWebProgramming.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDatabaseContext))]
-    [Migration("20240711142717_NomenclatoareMigration")]
+    [Migration("20240718164713_NomenclatoareMigration")]
     partial class NomenclatoareMigration
     {
         /// <inheritdoc />
@@ -48,9 +48,16 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdCor");
+
+                    b.HasIndex("IdSolicitant");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CnpCalificari");
                 });
@@ -77,9 +84,16 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("IdSolicitant");
+
                     b.HasIndex("IdStudii");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CnpStudii");
                 });
@@ -87,6 +101,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Cor", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CodCor")
@@ -116,6 +131,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Dosar", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CnpSolicitant")
@@ -134,10 +150,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<Guid>("IdSolicitant")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("NrDosar")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("PanaLa")
                         .HasColumnType("timestamp without time zone");
 
@@ -153,7 +165,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("NrDosar");
+                    b.HasIndex("IdSolicitant");
 
                     b.HasIndex("UserId");
 
@@ -169,9 +181,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("DosarId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("IdDosar")
                         .HasColumnType("uuid");
 
@@ -181,9 +190,14 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DosarId");
+                    b.HasIndex("IdDosar");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DosarRepartitii");
                 });
@@ -201,9 +215,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<string>("Agent")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("CorId")
-                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -239,7 +250,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CorId");
+                    b.HasIndex("IdCor");
 
                     b.HasIndex("UserId");
 
@@ -261,19 +272,10 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Property<DateTime>("DataRepartitie")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("DosarRId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("DosarRepartitiiId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("IdDosar")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("IdOlm")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RepartitiiOlmId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Rezultat")
@@ -288,11 +290,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DosarRId");
-
-                    b.HasIndex("DosarRepartitiiId");
-
-                    b.HasIndex("RepartitiiOlmId");
+                    b.HasIndex("IdOlm");
 
                     b.HasIndex("UserId");
 
@@ -345,6 +343,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Studii", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -444,31 +443,15 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.CnpCalificari", b =>
                 {
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.Solicitanti", "Solicitanti")
-                        .WithMany("Calificari")
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.Cor", "Cor")
+                        .WithMany("Lucratori")
                         .HasForeignKey("IdCor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Solicitanti");
-                });
-
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.CnpStudii", b =>
-                {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.Solicitanti", "Solicitanti")
-                        .WithMany("Pregatire")
-                        .HasForeignKey("IdStudii")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Solicitanti");
-                });
-
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Cor", b =>
-                {
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.CnpCalificari", "CnpCalificari")
-                        .WithOne("Cor")
-                        .HasForeignKey("MobyLabWebProgramming.Core.Entities.Cor", "Id")
+                        .WithMany("Calificari")
+                        .HasForeignKey("IdSolicitant")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -478,7 +461,47 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CnpCalificari");
+                    b.Navigation("Cor");
+
+                    b.Navigation("Solicitanti");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.CnpStudii", b =>
+                {
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.Solicitanti", "Solicitanti")
+                        .WithMany("Pregatire")
+                        .HasForeignKey("IdSolicitant")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.Studii", "Studii")
+                        .WithMany("Persoane")
+                        .HasForeignKey("IdStudii")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Solicitanti");
+
+                    b.Navigation("Studii");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Cor", b =>
+                {
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -487,7 +510,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                 {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.Solicitanti", "Solicitanti")
                         .WithMany("Dosare")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("IdSolicitant")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -505,19 +528,35 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.DosarRepartitii", b =>
                 {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.Dosar", "Dosar")
-                        .WithMany("Repartitii")
-                        .HasForeignKey("DosarId")
+                        .WithMany("RepartitiiDr")
+                        .HasForeignKey("IdDosar")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.Repartitie", "Repartitie")
+                        .WithMany("DosareDr")
+                        .HasForeignKey("IdDosar")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Dosar");
+
+                    b.Navigation("Repartitie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Olm", b =>
                 {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.Cor", "Cor")
-                        .WithMany()
-                        .HasForeignKey("CorId")
+                        .WithMany("Oferte")
+                        .HasForeignKey("IdCor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -534,19 +573,9 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Repartitie", b =>
                 {
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.Dosar", "DosarR")
-                        .WithMany()
-                        .HasForeignKey("DosarRId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.DosarRepartitii", null)
-                        .WithMany("Repartitii")
-                        .HasForeignKey("DosarRepartitiiId");
-
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.Olm", "RepartitiiOlm")
-                        .WithMany("Repartitii")
-                        .HasForeignKey("RepartitiiOlmId")
+                    b.HasOne("MobyLabWebProgramming.Core.Entities.Olm", "Olm")
+                        .WithMany("RepartitiiO")
+                        .HasForeignKey("IdOlm")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -556,9 +585,7 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DosarR");
-
-                    b.Navigation("RepartitiiOlm");
+                    b.Navigation("Olm");
 
                     b.Navigation("User");
                 });
@@ -574,19 +601,11 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Studii", b =>
                 {
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.CnpStudii", "CnpStudii")
-                        .WithOne("Studii")
-                        .HasForeignKey("MobyLabWebProgramming.Core.Entities.Studii", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CnpStudii");
 
                     b.Navigation("User");
                 });
@@ -602,31 +621,26 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.CnpCalificari", b =>
+            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Cor", b =>
                 {
-                    b.Navigation("Cor")
-                        .IsRequired();
-                });
+                    b.Navigation("Lucratori");
 
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.CnpStudii", b =>
-                {
-                    b.Navigation("Studii")
-                        .IsRequired();
+                    b.Navigation("Oferte");
                 });
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Dosar", b =>
                 {
-                    b.Navigation("Repartitii");
-                });
-
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.DosarRepartitii", b =>
-                {
-                    b.Navigation("Repartitii");
+                    b.Navigation("RepartitiiDr");
                 });
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Olm", b =>
                 {
-                    b.Navigation("Repartitii");
+                    b.Navigation("RepartitiiO");
+                });
+
+            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Repartitie", b =>
+                {
+                    b.Navigation("DosareDr");
                 });
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Solicitanti", b =>
@@ -636,6 +650,11 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Navigation("Dosare");
 
                     b.Navigation("Pregatire");
+                });
+
+            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Studii", b =>
+                {
+                    b.Navigation("Persoane");
                 });
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.User", b =>

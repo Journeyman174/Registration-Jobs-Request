@@ -19,6 +19,6 @@ namespace MobyLabWebProgramming.Core.Entities
         public Guid UserId { get; set; }
         public User User { get; set; } = default!;
         public Cor Cor { get; set; } = default!;
-        public ICollection<Repartitie> Repartitii { get; set; }= default!;
+        public ICollection<Repartitie> RepartitiiO { get; set; }= default!;
     }
 }

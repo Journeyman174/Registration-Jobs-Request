@@ -192,6 +192,9 @@ public static class WebApplicationBuilderExtensions
             .AddTransient<ICorService, CorService>()
             .AddTransient<IOlmService, OlmService>()
             .AddTransient<IRepartitieService, RepartitieService>()
+            .AddTransient<ICnpCalificariService, CnpCalificariService>()
+            .AddTransient<ICnpStudiiService, CnpStudiiService>()
+            .AddTransient<IDosarRepartitiiService, DosarRepartitiiService>()
             .AddTransient<IDosarService, DosarService>();
 
         return builder;

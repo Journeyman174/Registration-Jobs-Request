@@ -10,5 +10,8 @@ namespace MobyLabWebProgramming.Core.Entities
         // proprietati de navigare
         public  Solicitanti Solicitanti { get; set; } = default!;
         public Studii Studii { get; set; } = default!;
+        public Guid UserId { get; set; }
+        public User User { get; set; } = default!;
+
     }
 }

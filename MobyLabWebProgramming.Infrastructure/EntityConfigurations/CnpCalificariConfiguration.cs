@@ -11,13 +11,14 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfiguration
 
             builder.HasOne(e => e.Cor)
                 .WithMany(e => e.Lucratori)
-                .HasPrincipalKey(s => s.Id)
+                .HasForeignKey(e => e.IdCor)
+                 .HasPrincipalKey(s => s.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(e => e.Solicitanti)
                 .WithMany(e => e.Calificari)
-                .HasForeignKey(e => e.Id)
+                .HasForeignKey(e => e.IdSolicitant)
                 .HasPrincipalKey(e => e.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
