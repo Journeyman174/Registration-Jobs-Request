@@ -45,7 +45,7 @@ public class SolicitantService : ISolicitantService
     public async Task<ServiceResponse> AddSolicitant(SolicitantiAddDTO solicitant, UserDTO requestingUser, CancellationToken cancellationToken = default)
     {
         
-        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Solicitant) // Verify who can add the user, you can change this however you se fit.
+        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Solicitant && requestingUser.Role != UserRoleEnum.Admin) // Verify who can add the user, you can change this however you se fit.
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the Solocitant can add in Solicitanti!", ErrorCodes.CannotAdd));
         }
