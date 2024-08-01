@@ -40,5 +40,13 @@ public sealed class CnpStudiiProjectionSpec : BaseSpec<CnpStudiiProjectionSpec, 
         }
         Query.Where(e => e.UserId == UserId);
     }
+    public CnpStudiiProjectionSpec(Guid idSolicitant, bool state)
+    {
+        if (state == true)
+        {
+
+        }
+        Query.Where(e => e.IdSolicitant == idSolicitant);
+    }
 
 }

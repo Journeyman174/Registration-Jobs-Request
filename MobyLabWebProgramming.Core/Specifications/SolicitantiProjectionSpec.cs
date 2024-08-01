@@ -42,6 +42,17 @@ public sealed class SolicitantiProjectionSpec : BaseSpec<SolicitantiProjectionSp
         }
         Query.Where(e => e.UserId == UserId);
     }
+    public SolicitantiProjectionSpec(Guid UserId, bool state)
+    {
+        if (state == true)
+        {
+            Query.Where(e => e.UserId == UserId );
+        }
+        else
+        {
+            Query.Where(e => e.UserId == UserId);
+        }
+    }
 
     public SolicitantiProjectionSpec(string? search,UserDTO user)
     {

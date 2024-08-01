@@ -36,8 +36,8 @@ public class CnpCalificariController : AuthorizedController // Here we use the A
     {
         var currentUser = await GetCurrentUser();
 
-        return currentUser.Result != null ? 
-            this.FromServiceResponse(await _cnpCalificariService.GetCnpCalificari(id)) : 
+        return currentUser.Result != null ?
+            this.FromServiceResponse(await _cnpCalificariService.GetCnpCalificari(id)) :
             this.ErrorMessageResult<CnpCalificariDTO>(currentUser.Error);
     }
 
@@ -52,7 +52,7 @@ public class CnpCalificariController : AuthorizedController // Here we use the A
     {
         var currentUser = await GetCurrentUser();
         return currentUser.Result != null ?
-            this.FromServiceResponse(await _cnpCalificariService.GetUserCnpCalificari(currentUser.Result.Id,pagination)) :
+            this.FromServiceResponse(await _cnpCalificariService.GetUserCnpCalificari(currentUser.Result.Id, pagination)) :
             this.ErrorMessageResult<PagedResponse<CnpCalificariDTO>>(currentUser.Error);
     }
 
@@ -64,10 +64,10 @@ public class CnpCalificariController : AuthorizedController // Here we use the A
     public async Task<ActionResult<RequestResponse>> Create([FromBody] CnpCalificariAddDTO aux)
     {
         var currentUser = await GetCurrentUser();
-       
+
 
         return currentUser.Result != null ?
-            this.FromServiceResponse(await _cnpCalificariService.CreateCnpCalificari(aux.IdSolicitant,aux.IdCor,currentUser.Result)) :
+            this.FromServiceResponse(await _cnpCalificariService.CreateCnpCalificari(aux.IdSolicitant, aux.IdCor, currentUser.Result)) :
             this.ErrorMessageResult(currentUser.Error);
     }
 

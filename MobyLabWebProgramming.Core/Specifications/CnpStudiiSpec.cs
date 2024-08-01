@@ -21,4 +21,14 @@ public sealed class CnpStudiiSpec : BaseSpec<CnpStudiiSpec, CnpStudii>
         }
         Query.Where(e => e.UserId == Userid);
     }
+
+    public CnpStudiiSpec(Guid id, Guid IdSolicitant, Guid IdStudii)
+    {
+        if (id == IdSolicitant)
+        {
+
+        }
+        Query.Where(e => e.IdSolicitant == IdSolicitant && e.IdStudii == IdStudii);
+    }
+
 }

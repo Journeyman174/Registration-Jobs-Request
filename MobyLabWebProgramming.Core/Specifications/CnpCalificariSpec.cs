@@ -13,12 +13,21 @@ public sealed class CnpCalificariSpec : BaseSpec<CnpCalificariSpec, CnpCalificar
     {
     }
 
-    public CnpCalificariSpec(Guid id,Guid Userid)
+    public CnpCalificariSpec(Guid id, Guid Userid)
     {
         if (id == Userid)
         {
 
         }
         Query.Where(e => e.UserId == Userid);
+    }
+
+    public CnpCalificariSpec(Guid id, Guid IdSolicitant, Guid IdCor)
+    {
+        if (id == IdSolicitant)
+        {
+
+        }
+        Query.Where(e => e.IdSolicitant == IdSolicitant && e.IdCor == IdCor);
     }
 }

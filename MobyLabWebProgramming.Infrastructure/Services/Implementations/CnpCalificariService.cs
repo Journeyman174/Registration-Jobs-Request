@@ -34,7 +34,7 @@ public class CnpCalificariService : ICnpCalificariService
             ServiceResponse.FromError(CommonErrors.CnpCalificariNotFound)); // Pack the result or error into a ServiceResponse.
     }
 
-    public async Task<ServiceResponse<PagedResponse<CnpCalificariDTO>>> GetUserCnpCalificari(Guid id, PaginationSearchQueryParams pagination, CancellationToken cancellationToken = default)
+    public async Task<ServiceResponse<PagedResponse<CnpCalificariDTO>>> GetUserCnpCalificari(Guid id,PaginationSearchQueryParams pagination, CancellationToken cancellationToken = default)
     {
         var result = await _repository.PageAsync(pagination, new CnpCalificariProjectionSpec(id,id), cancellationToken);
 

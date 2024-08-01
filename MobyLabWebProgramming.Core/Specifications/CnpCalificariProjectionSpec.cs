@@ -32,13 +32,30 @@ public sealed class CnpCalificariProjectionSpec : BaseSpec<CnpCalificariProjecti
     {
     }
 
-    public CnpCalificariProjectionSpec(Guid id,Guid UserId)
+    public CnpCalificariProjectionSpec(Guid id, Guid UserId)
     {
         if (id == UserId)
         {
 
         }
         Query.Where(e => e.UserId == UserId);
+    }
+
+    public CnpCalificariProjectionSpec(Guid id, Guid idSolicitant,bool state)
+    {
+        if (id == idSolicitant)
+        {
+
+        }
+        Query.Where(e => e.IdSolicitant == idSolicitant);
+    }
+    public CnpCalificariProjectionSpec(Guid idSolicitant, bool state)
+    {
+        if (state == true)
+        {
+
+        }
+        Query.Where(e => e.IdSolicitant == idSolicitant);
     }
 
 }
